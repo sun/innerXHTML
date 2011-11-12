@@ -1,15 +1,12 @@
-/*
-Written by Steve Tucker, 2006, http://www.stevetucker.co.uk
-Full documentation can be found at http://www.stevetucker.co.uk/page-innerxhtml.php
-Released under the Creative Commons Attribution-Share Alike 3.0  License, http://creativecommons.org/licenses/by-sa/3.0/
-
-Change Log
-----------
-15/10/2006	v0.3	innerXHTML official release.
-21/03/2007	v0.4	1. Third argument $appendage added (Steve Tucker & Stef Dawson, www.stefdawson.com)
-			2. $source argument accepts string ID (Stef Dawson)
-			3. IE6 'on' functions work (Stef Dawson & Steve Tucker)
-*/
+/**
+ * @file
+ * innerXHTML
+ *
+ * @author Steve Tucker, http://www.stevetucker.co.uk/
+ * @see https://github.com/sun/innerXHTML
+ * @license MIT/Expat, see LICENSE-MIT.txt
+ * @license GNU General Public License v2, see LICENSE-GPL.txt
+ */
 innerXHTML = function($source,$string,$appendage) {
 	// (v0.4) Written 2006 by Steve Tucker, http://www.stevetucker.co.uk
 	if (typeof($source) == 'string') $source = document.getElementById($source);
