@@ -9,8 +9,12 @@
  */
 innerXHTML = function(source,string,appendage) {
   // (v0.4) Written 2006 by Steve Tucker, http://www.stevetucker.co.uk
-  if (typeof(source) == 'string') source = document.getElementById(source);
-  if (!(source.nodeType == 1)) return false;
+  if (typeof(source) == 'string') {
+    source = document.getElementById(source);
+  }
+  if (!(source.nodeType == 1)) {
+    return false;
+  }
   var children = source.childNodes;
   var xhtml = '';
   if (!string) {
@@ -55,9 +59,15 @@ innerXHTML = function(source,string,appendage) {
       var elements = returned[0];
       string = returned[1];
       if (elements) {
-        if (typeof(appendage) == 'string') appendage = document.getElementById(appendage);
-        if (!(appendage.nodeType == 1)) source.appendChild(elements);
-        else source.insertBefore(elements,appendage);
+        if (typeof(appendage) == 'string') {
+          appendage = document.getElementById(appendage);
+        }
+        if (!(appendage.nodeType == 1)) {
+          source.appendChild(elements);
+        }
+        else {
+          source.insertBefore(elements,appendage);
+        }
       }
     }
   }
@@ -88,8 +98,12 @@ function translateXHTML(string) {
           attribute = attribute.replace(/;{0,1}"/,'');
           if (attribute) {
             var attValue = attribute;
-            if (attName == 'value') new_element.value = attValue;
-            else if (attName == 'class') new_element.className = attValue;
+            if (attName == 'value') {
+              new_element.value = attValue;
+            }
+            else if (attName == 'class') {
+              new_element.className = attValue;
+            }
             else if (attName == 'style') {
               var style = attValue.split(';');
               for (var i=0; i<style.length; i++) {
@@ -111,10 +125,18 @@ function translateXHTML(string) {
                 new_element.style[this_style[0]] = this_style[1];
               }
             }
-            else if (/^on/.test(attName)) new_element[attName] = function() { eval(attValue) };
-            else new_element.setAttribute(attName,attValue);
+            else if (/^on/.test(attName)) {
+              new_element[attName] = function() {
+                eval(attValue);
+              };
+            }
+            else {
+              new_element.setAttribute(attName,attValue);
+            }
           }
-          else attribute = true;
+          else {
+            attribute = true;
+          }
         }
       }
       match = /^>/.test(string);
@@ -124,7 +146,9 @@ function translateXHTML(string) {
         while (child) {
           var returned = translateXHTML(string,false);
           child = returned[0];
-          if (child) new_element.appendChild(child);
+          if (child) {
+            new_element.appendChild(child);
+          }
           string = returned[1];
         }
       }
@@ -148,7 +172,9 @@ function translateXHTML(string) {
       var new_element = document.createComment(text_content);
       string = string.replace(/^[^<>]{1,}-->/i,'');
     }
-    else string = string.replace(/^<!--[^<>]{1,}-->/i,'');
+    else {
+      string = string.replace(/^<!--[^<>]{1,}-->/i,'');
+    }
   }
   return [new_element, string];
 }
