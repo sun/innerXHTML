@@ -7,8 +7,29 @@
  * @license MIT/Expat, see LICENSE-MIT.txt
  * @license GNU General Public License v2, see LICENSE-GPL.txt
  */
+
+/**
+ * Reads or writes a DOM tree from or to a DOM element.
+ *
+ * @param Node|String source
+ *   A node or HTML ID string of a node to read from, or write to if string is
+ *   passed.
+ * @param String string
+ *   A string containing HTML to replace or append to source. If omitted, source
+ *   is parsed and returned as a string.
+ * @param false|Node|String|true appendage
+ *   Controls where string is injected, one of:
+ *   - false: (default) Replaces all children of source.
+ *   - Node: A DOM node. string is inserted before it.
+ *   - ID: A HTML ID string suitable for document.getElementById(). string is
+ *     inserted before it.
+ *   - true: Appends string to source.
+ *
+ * @return String|false
+ *   A text string of the contained XHTML markup of source, or false if source
+ *   is not a Node.
+ */
 innerXHTML = function(source, string, appendage) {
-  // (v0.4) Written 2006 by Steve Tucker, http://www.stevetucker.co.uk
   if (typeof(source) == 'string') {
     source = document.getElementById(source);
   }
@@ -72,8 +93,20 @@ innerXHTML = function(source, string, appendage) {
     }
   }
   return xhtml;
-}
+};
 
+/**
+ * Translates a string containing XHTML and XML markup into nodes for insertion into the DOM.
+ *
+ * @param String string
+ *   A string containing XHTML.
+ *
+ * @return Array
+ *   An array containing
+ *   - the new DOM element structure parsed out of string, or false if string
+ *     was not translated.
+ *   - the new XHTML string parsed out of string.
+ */
 function translateXHTML(string) {
   var match = /^<\/[a-z0-9]{1,}>/i.test(string);
   if (match) {
