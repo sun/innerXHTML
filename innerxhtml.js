@@ -41,8 +41,11 @@ innerXHTML = function(source, string, appendage) {
             xhtml += ' ' + attName + '="' + attValue + '"';
           }
         }
-        xhtml += '>' + innerXHTML(children[i]);
-        xhtml += '</' + children[i].nodeName.toLowerCase() + '>';
+        var childInnerXHTML = innerXHTML(children[i]);
+        if (childInnerXHTML == '') 
+          xhtml += ' />';
+        else
+          xhtml += '>' + childInnerXHTML + '</' + children[i].nodeName.toLowerCase() + '>';
       }
     }
   }
@@ -177,4 +180,8 @@ function translateXHTML(string) {
     }
   }
   return [new_element, string];
+}
+
+Element.prototype.innerXHTML = function(string, appendage){
+  return innerXHTML(this, string, appendage);
 }
