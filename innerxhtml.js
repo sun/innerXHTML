@@ -181,3 +181,7 @@ function translateXHTML(string) {
   }
   return [new_element, string];
 }
+
+Element.prototype.innerXHTML = function(string, appendage){
+  return innerXHTML(this, string, appendage);
+}
